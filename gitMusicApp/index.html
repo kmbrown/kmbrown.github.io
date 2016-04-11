@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width,
+            maximum-scale=1,
+            minimum-scale=1,
+            initial-scale=1,
+            user-scalable=no"
+        >
+        <title>Git Y'r Music</title>
+        <link rel="stylesheet" href="styles.css">
+        <script src="js/prefixfree.js"></script>
+    </head>
+    <body>
+        <div id="mobileHolder">
+            <div id="content" class="portal">
+                 <div>
+                     <span id="menuButton">&equiv;</span>
+
+                 </div>
+                <h3 id="appTitle">Git Y'r Music!</h3>
+                    <br/>
+                     <div id="currentlyPlaying"></div>
+                    <br/>
+                      &nbsp;Current Playlist&rAarr;<select id="chooser" class="roundPink"><div id="shuffleIcon">testing</div>
+                    <option>Select A Playist</option>
+                </select>
+                <br/>
+                <div id="playlistHolder">
+                    <select id="playlist" class="roundPink">
+                        <option>Choose a Song</option>
+                    </select>
+                </div><!-- end of playlistHolder -->
+                <br/>
+                <audio id="audioPlayer" controls autoplay src="http://www.noiseaddicts.com/samples_1w72b820/4929.mp3"></audio>
+                <!--http://www.noiseaddicts.com/free-samples-mp3/-->
+            </div><!-- end of content -->
+            <div id="menu" class="portal"><span id="X">&cross;</span>
+                <div id="gitFriend">
+                    GitHub Friend&rAarr;<input id="gitname" type="text" class="roundPink">
+                    <input type="button" id="btn" value="Get Friend's Playlist" class="roundPink">
+                </div>
+
+            </div>
+        </div><!-- end mobileHolder-->
+
+    <!--NO HTML BELOW THIS POINT-->
+    <script src="main.js"></script>
+    </body>
+</html>
