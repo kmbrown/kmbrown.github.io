@@ -7,7 +7,7 @@
         </div>
         <h3 id="appTitle">Git Y'r Music!</h3>
            &nbsp;GitHub Friend&rAarr;<input id="gitname" type="text" class="roundPink">
-            <input type="button" id="btn" value="Get Friend's Playlist" class="roundPink">
+            <input type="button" id="friendButton" value="Get Friend's Playlist" class="roundPink">
             <br/><br/>
           &nbsp;Current Playlist&rAarr;
         <select id="chooser" class="roundPink"><div id="shuffleIcon">testing</div>
@@ -34,7 +34,7 @@ function id(string) {
 }
 var content = id("content");
 var gitname = id("gitname");
-var btn = id("btn");
+var friendButton = id("friendButton");
 var chooser = id("chooser");
 var playlist = id("playlist");
 var audioPlayer = id("audioPlayer");
@@ -42,6 +42,7 @@ var currentlyPlaying = id("currentlyPlaying");
 var menuButton = id("menuButton");
 var menu = id("menu");
 var X = id("X");
+var appTitle = id("appTitle");
 var propNames = Object.keys;
 var playlistHeader = "Choose a Song";
 var ajax = new XMLHttpRequest();
@@ -58,26 +59,12 @@ var menuOpen = false;
 
 window.onload = initialize;
 playlist.onchange = playSong;
-btn.onclick = function (e) {
-    flashObjectColor(this, "white", 0.25);
-    getNewList(e);
-};
-menuButton.onclick = function (e) {
-    toggleMenu(e);
-    flashObjectColor(this, "white", 0.25);
-};
-X.onclick = function (e) {
-    toggleMenu(e);
-    flashObjectColor(this, "white", 0.25);
-};
-id("appTitle").onclick = function (e) {
-    toggleMenu(e);
-    flashObjectColor(menuButton, "white", 0.25);
-};
+friendButton.onclick = getNewList;
+menuButton.onclick = toggleAndFlash;
+X.onclick = toggleAndFlash;
+appTitle.onclick = toggleAndFlash;
 gitname.onkeyup = getNewList;
-gitname.onclick = function () {
-    this.value = "";
-};
+gitname.onclick = clearInput;
 chooser.onchange = changePlayList;
 
 //====| Under The Hood |====
@@ -90,14 +77,30 @@ function initialize() {
     // 3. Further augment our lists object with browser's copy
     addListsFromBrowser();
     // 4. Store lists object on the browser
-    storeListsToBrowser();
+    //storeListsToBrowser();
     configureResizing();
     
-} //===| END of initialize() |=====
+}
+function toggleAndFlash(e){
+    toggleMenu(e);
+    flashObjectColor(this, "white", 0.25);
+}
+function clearInput(e){
+     e.target.value = "";
+}
+//===| END of initialize() |=====
 
-var addListsFromBrowser = function addListsFromBrowser() {};
+function addListsFromBrowser() {
+    var serverList = window.localStorage.getItem("lists");
+    var userLists = JSON.parse(serverList);
+    for (var list in userLists) {
+        if (!lists[list]) {
+            lists[list] = userLists[list];
+            }
+    }
+}
 //----------
-var addListsFromServer = function addListsFromServer() {
+function addListsFromServer() {
     var listGetter = new XMLHttpRequest();
     listGetter.open("GET", "lists.json");
     listGetter.send();
@@ -112,9 +115,16 @@ var addListsFromServer = function addListsFromServer() {
             }
         }
         addPlaylistNamesToBox(); //the slippery slope to callback hell
+        storeListsToBrowser();
     };
-};
-var storeListsToBrowser = function storeListsToBrowser() {};
+}
+function storeListsToBrowser() {
+    if(window.localStorage !== undefined){
+        var listString = JSON.stringify(lists);
+        window.localStorage.setItem("lists", listString);
+        alert(window.localStorage.getItem("lists"));
+    }
+}
 //----------
 function configureResizing() {
     resizeAndCenter();
