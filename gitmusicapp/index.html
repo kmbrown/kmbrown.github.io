@@ -1,4 +1,14 @@
 <!doctype html>
+<!--
+/*
+    Author: Abbas Abdulmalik
+    Creation Date: April 7, 2016
+    Title:  Git Y'r Music
+    Revised: April 12, 2016
+    Purpose: A music playlist sharing app
+    Notes: play friends' music without downloading the file
+*/  
+-->
 <html>
     <head>
         <meta charset="utf-8">
@@ -12,38 +22,71 @@
         <title>Git Y'r Music</title>
         <link rel="stylesheet" href="styles.css">
         <script src="js/prefixfree.js"></script>
+        <script src="js/CreateListMixer.js"></script>        
     </head>
     <body>
         <div id="mobileHolder">
             <div id="content" class="portal">
                  <div>
-                     <span id="menuButton">&equiv;</span>
-
+                     <span id="menuButton">&equiv;<span id="menuWord">&nbsp;menu</span></span>
                  </div>
                 <h3 id="appTitle">Git Y'r Music!</h3>
                     <br/>
                      <div id="currentlyPlaying"></div>
                     <br/>
-                      &nbsp;Current Playlist&rAarr;<select id="chooser" class="roundPink"><div id="shuffleIcon">testing</div>
+                      &nbsp;Current Playlist&rAarr;<select id="chooser" class="roundPink">
                     <option>Select A Playist</option>
                 </select>
-                <br/>
-                <div id="playlistHolder">
-                    <select id="playlist" class="roundPink">
-                        <option>Choose a Song</option>
-                    </select>
-                </div><!-- end of playlistHolder -->
+                <div id="audioControls">
+
+
+                    <div id="playlistHolder">
+                        <select id="playlist" class="roundPink">
+                            <option>Choose a Song</option>
+                        </select>
+                        <div id="previousSong">&laquo;</div><!--	&#9193;-->
+                        <div id="shuffleBox">
+                             <span id="shuffleIcon">&sect;</span>&nbsp;shuffle&nbsp;<span id="shuffleState">&nbsp;off</span>  
+                        </div>
+                        <div id="nextSong">&raquo;</div><!--	&#9193;-->                        
+                    </div><!-- end of playlistHolder -->                    
+                </div>
+
                 <br/>
                 <audio id="audioPlayer" controls autoplay src="http://www.noiseaddicts.com/samples_1w72b820/4929.mp3"></audio>
                 <!--http://www.noiseaddicts.com/free-samples-mp3/-->
             </div><!-- end of content -->
-            <div id="menu" class="portal"><span id="X">&cross;</span>
-                <div id="gitFriend">
-                    GitHub Friend&rAarr;<input id="gitname" type="text" class="roundPink">
-                    <input type="button" id="friendButton" value="Get Friend's Playlist" class="roundPink">
-                </div>
 
-            </div>
+            <div id="menu" class="portal"><span id="X">&cross;</span>
+                <table>
+                    <tr><td>
+                    <div id="gitFriend" class="gitMenu">
+                        &bull;&nbsp;GitHub Friend&rAarr;<input id="gitName" type="text" class="roundPink" placeholder="Try SabbaKilam">
+                        <input type="button" id="friendButton" value="Get Friend's Playlist" class="roundPink">
+                    </div>
+                    </td></tr>
+                    <tr><td>
+                        <div id="gitFile" class="gitMenu">
+                            &bull;&nbsp;Upload a Song&rAarr;<input  id="fileInput" type="file" class="roundPink">
+                        </div>
+                    </td></tr>
+                    <tr><td>
+                        <div id="gitColor" class="gitMenu">
+                            &bull;&nbsp;Color Choices&rAarr;<input type="range" id="colorSlider" value="186" min="1" max="359" class="roundPink">
+                        </div>
+                    </td></tr>
+                    <tr><td>
+                        <div id="gitColor" class="gitMenu">
+                            &bull;&nbsp;Remove playlist&rAarr;<select id="removeList"  class="roundPink">
+                                <option>Choose Playlist to Remove</option>
+                            </select>
+                        </div>                        
+                    </td></tr>
+                    <tr><td></td></tr>
+                    <tr><td></td></tr>
+                </table>
+            </div><!-- end of menu-->
+            <input type="range" id="shadowSlider" value="186" min="1" max="359" class="roundPink">
         </div><!-- end mobileHolder-->
 
     <!--NO HTML BELOW THIS POINT-->

@@ -1,7 +1,7 @@
 <?php
 
 $root = $_SERVER['DOCUMENT_ROOT'] . "/";
-$filename = "lists.json";
+$filename = "gitmusicapp/lists.json";
 $destination = $root . $filename;
 $source = $_POST['lists'];
 
